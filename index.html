@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Mission ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    color: white;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.gif {
+    width: 200px;
+    margin: 20px auto;
+}
+
+.area {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+#start {
+    background: #1e90ff;
+    color: white;
+}
+
+#accept {
+    background: green;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+#reject {
+    background: red;
+    color: white;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO SCREEN -->
+<div class="wrapper" id="intro">
+    <img class="gif" src="https://media.giphy.com/media/l2JHRhAtnJSDNJ2py/giphy.gif" alt="spy mission gif">
+    <p>
+        Mr. Aashish, your mission today is very important…<br>
+        You must secure the target’s ❤️<br>
+        Do not panic, follow instructions carefully.
+    </p>
+    <button id="start">Start Mission 🚀</button>
+</div>
+
+<!-- MISSION SCREEN -->
+<div class="wrapper" id="mission" style="display:none;">
+    <img class="gif" src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif" alt="love spy gif">
+    <h1>Your Mission, if you choose to accept it:</h1>
+    <p id="message"></p>
+
+    <div class="area">
+        <button id="accept">ACCEPT ✅</button>
+        <button id="reject">REJECT ❌</button>
+    </div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div class="wrapper" id="final" style="display:none;">
+    <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="love hearts gif">
+
+    <h1>MISSION COMPLETED! 🥹💖</h1>
+    <p>
+        Welcome to my heart, Mr. Husband 🕵️‍♂️❤️<br>
+        Mission success! You are officially my forever partner.
+    </p>
+</div>
+
+<script>
+var intro = document.getElementById("intro");
+var mission = document.getElementById("mission");
+var final = document.getElementById("final");
+
+var startBtn = document.getElementById("start");
+var acceptBtn = document.getElementById("accept");
+var rejectBtn = document.getElementById("reject");
+var message = document.getElementById("message");
+
+var rejectCount = 0;
+
+// Start mission button
+startBtn.addEventListener("click", function() {
+    intro.style.display = "none";
+    mission.style.display = "block";
+});
+
+// REJECT button moves
+function moveReject() {
+    rejectCount++;
+
+    var area = document.querySelector(".area");
+    var maxX = area.clientWidth - rejectBtn.offsetWidth;
+    var maxY = area.clientHeight - rejectBtn.offsetHeight;
+
+    var x = Math.random() * maxX;
+    var y = Math.random() * maxY;
+
+    rejectBtn.style.left = x + "px";
+    rejectBtn.style.top = y + "px";
+
+    if(rejectCount >= 3){
+        message.innerHTML = "Do you really think you can reject this mission? 😏<br>Click ACCEPT or be trapped forever! ❤️";
+    }
+}
+
+// Add click/touch events for mobile
+rejectBtn.addEventListener("click", moveReject);
+rejectBtn.addEventListener("touchstart", moveReject);
+
+// ACCEPT button shows final screen
+acceptBtn.addEventListener("click", function(){
+    mission.style.display = "none";
+    final.style.display = "block";
+});
+</script>
+
+</body>
+</html>
